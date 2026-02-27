@@ -3,11 +3,7 @@ import { Request, Response } from "express";
 export const calculateMortgage = (req: Request, res: Response) => {
   const { housePrice, annualInterestRate, loanTermYears } = req.body;
 
-  if (
-    housePrice == null ||
-    annualInterestRate == null ||
-    loanTermYears == null
-  ) {
+  if(housePrice == null || annualInterestRate == null || loanTermYears == null) {
     return res.status(400).json({ error: "All fields are required." });
   }
 
@@ -23,12 +19,11 @@ export const calculateMortgage = (req: Request, res: Response) => {
 
   let monthlyPayment: number;
 
-  if (r === 0) {
+  if(r === 0) {
     monthlyPayment = P / n;
-  } else {
-    monthlyPayment =
-      (P * r * Math.pow(1 + r, n)) /
-      (Math.pow(1 + r, n) - 1);
+  } 
+  else {
+    monthlyPayment = (P * r * Math.pow(1 + r, n))/(Math.pow(1 + r, n) - 1);
   }
 
   res.json({

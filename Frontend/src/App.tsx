@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [housePrice, setHousePrice] = useState("");
@@ -7,7 +8,8 @@ function App() {
   const [result, setResult] = useState<number | null>(null);
   const [error, setError] = useState("");
 
-  const handleCalculate = async () => {
+  const handleCalculate = async (e: React.FormEvent) => {
+    e.preventDefault();
     setError("");
     setResult(null);
 
@@ -52,34 +54,49 @@ function App() {
   };
 
   return (
-    <div style={{ padding: "2rem", maxWidth: "400px", margin: "auto" }}>
-      <h1>Mortgage Calculator</h1>
+    <div className="container">
+      <div className="card">
+        <h1>Mortgage Calculator</h1>
 
-      <input
-        type="number"
-        placeholder="House Price"
-        value={housePrice}
-        onChange={(e) => setHousePrice(e.target.value)}
-      />
+        <form onSubmit={handleCalculate}>
+          <div className="input-group">
+            <label>House Price</label>
+            <input
+              type="number"
+              value={housePrice}
+              onChange={(e) => setHousePrice(e.target.value)}
+            />
+          </div>
 
-      <input
-        type="number"
-        placeholder="Annual Interest Rate (%)"
-        value={annualInterestRate}
-        onChange={(e) => setAnnualInterestRate(e.target.value)}
-      />
+          <div className="input-group">
+            <label>Annual Interest Rate (%)</label>
+            <input
+              type="number"
+              value={annualInterestRate}
+              onChange={(e) => setAnnualInterestRate(e.target.value)}
+            />
+          </div>
 
-      <input
-        type="number"
-        placeholder="Loan Term (years)"
-        value={loanTermYears}
-        onChange={(e) => setLoanTermYears(e.target.value)}
-      />
+          <div className="input-group">
+            <label>Loan Term (years)</label>
+            <input
+              type="number"
+              value={loanTermYears}
+              onChange={(e) => setLoanTermYears(e.target.value)}
+            />
+          </div>
 
-      <button onClick={handleCalculate}>Calculate</button>
+          <button type="submit">Calculate</button>
+        </form>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {result && <h2>Monthly Payment: ${result}</h2>}
+        {error && <p className="error">{error}</p>}
+
+        {result !== null && (
+          <div className="result">
+            Monthly Payment: <strong>${result}</strong>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
