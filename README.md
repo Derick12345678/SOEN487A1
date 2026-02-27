@@ -60,3 +60,49 @@ http://localhost:5000
 ```
 
 ---
+## Example Inputs and Outputs
+
+### Example 1
+
+**Request**
+```json
+POST /calculate-mortgage
+
+{
+  "housePrice": 500000,
+  "annualInterestRate": 5,
+  "loanTermYears": 25
+}
+```
+
+**Response**
+```json
+{
+  "monthlyPayment": 2923.95
+}
+```
+
+---
+
+### Example 2
+
+**Request**
+```json
+POST /calculate-mortgage
+
+{
+  "housePrice": 350000,
+  "annualInterestRate": 3.5,
+  "loanTermYears": 20
+}
+```
+
+**Response**
+```json
+{
+  "monthlyPayment": 2029.86
+}
+```
+
+---
+
